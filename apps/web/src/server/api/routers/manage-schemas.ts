@@ -1,4 +1,4 @@
-import { type Permission } from "@prisma/client";
+// import { type Permission } from "@prisma/client";
 import { TRPCError } from "@trpc/server";
 import { string, z } from "zod";
 import {
@@ -71,7 +71,7 @@ export const manageSchemaRouter = createTRPCRouter({
         }
       }
 
-      const permission: Permission = isOwner
+      const permission: string = isOwner
         ? "UPDATE"
         : schema?.shareSchema?.permission || "VIEW";
 
@@ -119,7 +119,7 @@ export const manageSchemaRouter = createTRPCRouter({
         .map((u) => u.id)
         .includes(session.user.id);
 
-      const permission: Permission = isOwner
+      const permission: string = isOwner
         ? "UPDATE"
         : isSchemaSharedWith
         ? schema?.shareSchema?.permission || "VIEW"
